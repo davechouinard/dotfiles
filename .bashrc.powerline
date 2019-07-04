@@ -1,0 +1,17 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# if powerline is installed, then use it
+command -v powerline-daemon &>/dev/null
+if [ $? -eq 0 ]; then
+  powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  . POWERLINE_LOCATION/powerline/bindings/bash/powerline.sh
+fi
+
+[[ -f ~/.local.environment ]] && . ~/.local.environment

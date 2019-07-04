@@ -1,0 +1,225 @@
+{
+  // Place your snippets for ansible here. Each snippet is defined under a snippet name and has a prefix, body and 
+  // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+  // same ids are connected.
+  // Example:
+  // "Print to console": {
+  //   "prefix": "log",
+  //   "body": [
+  //     "console.log('$1');",
+  //     "$2"
+  //   ],
+  //   "description": "Log output to console"
+  // }
+
+  "command": {
+    "prefix": "command",
+    "body": [
+      "- name: ${1:Example command with registered var}",
+      "  command: ${2:cat /etc/motd}",
+      "  register: mymotd",
+    ],
+  },
+  "copy": {
+    "prefix": "copy",
+    "body": [
+      "- name: ${1:Example copy file with owner and permissions}",
+      "  copy:",
+      "    src: ${2:/srv/myfiles/foo.conf}",
+      "    dest: ${3:/etc/foo.conf}",
+      "    owner: ${4:foo}",
+      "    group: ${5:foo}",
+      "    mode: ${6:0644}",
+      "    backup: ${7|false,true|}",
+    ],
+  },
+  "debug": {
+    "prefix": "debug",
+    "body": [
+      "- debug:",
+      "    msg: \"System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}\"",
+    ],
+  },
+  "fail": {
+    "prefix": "fail",
+    "body": [
+      "- fail:", 
+      "    msg: \"${1:Bailing out. this play requires 'bar'}\"",
+      "  when: ${2:bar is not defined}",
+    ],
+  },
+  "file": {
+    "prefix": "file",
+    "body": [
+      "- name: ${1:Example set file attributes}",
+      "  file:",
+      "    path: ${2:/etc/foo.conf}",
+      "    owner: ${3:foo}",
+      "    group: ${4:foo}",
+      "    mode: ${5:0644}",
+      "    state: ${6|file,absent,directory,touch|}",
+      "    recurse: true ${7:#only for directory}",
+    ],
+  },
+  "get_url": {
+    "prefix": "get_url",
+    "body": [
+      "- name: ${1: Download file}",
+      "  get_url:",
+      "    url: ${2: http://example.com/path/file}",
+      "    dest: ${3: /path/file}",
+      "    mode: ${4: 0440}",
+    ],
+  },
+  "git": {
+    "prefix": "git",
+    "body": [
+      "- name: ${1: Git repo checkout}",
+      "  git:",
+      "    repo: 'https://foosball.example.org/path/to/repo.git'",
+      "    dest: /srv/checkout",
+      "    update: no",
+    ],
+  },
+  "link": {
+    "prefix": "link",
+    "body": [
+      "- name: ${1:Example create link}",
+      "  file:",
+      "    src: ${2:/file/to/link/to}",
+      "    dest: ${3:/path/to/symlink}",
+      "    owner: ${4:foo}",
+      "    group: ${5:foo}",
+      "    state: ${6|link,hard|}",
+    ],
+  },
+  "meta": {
+    "prefix": "meta",
+    "body": [
+      "- meta: flush_handlers    # force all notified handlers to run at this point, not waiting for normal sync points",
+      "- meta: refresh_inventory # refresh inventory to ensure new instances exist in inventory",
+      "- meta: clear_facts       # clear gathered facts from all currently targeted hosts",
+      "- meta: clear_host_errors # bring a host back to play after failure",
+      "- meta: reset_connection  # reset ssh connection to allow user changes to affect current login user",
+      "- meta: end_play          # end a play without failing the hosts",
+    ],
+  },
+  "mount": {
+    "prefix": "mount",
+    "body": [
+      "- name: ${1:Mount DVD read-only}",
+      "  mount:",
+      "    path: ${2:/mnt/dvd}",
+      "    src: ${3/dev/sr0}",
+      "    fstype: ${4:iso9660}",
+      "    ${5:opts: ro,noauto}",
+      "    state: ${6|absent,mounted,present,unmounted|}",
+    ],
+  },
+  "package": {
+    "prefix": "package",
+    "body": [
+      "- name: ${1:Install package example}",
+      "  package:",
+      "    name: ['httpd', 'httpd-tools']",
+      "    state: ${2|present,latest,absent|}",
+    ],
+  },
+  "pip": {
+    "prefix": "pip",
+    "body": [
+      "- name: ${1:Install python package}",
+      "  pip:",
+      "    name: ${2:bottle}",
+      "    state: ${3|present,absent,latest,forcereinstall|}",
+    ],
+  },
+  "playbook": {
+    "prefix": "playbook",
+    "body": [
+      "---",
+      "- name: ${1:Example playbook}",
+      "  hosts: localhost",
+      "  connection: local",
+      "  become: false",
+      "  gather_facts: false",
+      "",
+      "  pre_tasks:",
+      "    - name: pre tasks",
+      "      command: echo pre",
+      "",
+      "  roles:",
+      "    - <rolename>",
+      "",
+      "  post_tasks:",
+      "    - name: post tasks",
+      "      command: echo post",
+      "",
+     ],
+  },
+  "service": {
+    "prefix": "service",
+    "body": [
+      "- name: ${1:Start and enable service}",
+      "  service:",
+      "    name: ${2}",
+      "    state: ${3|reloaded,restarted,started,stopped|}",
+      "    enabled: ${4|true,false|}",
+    ],
+  },
+  "shell": {
+    "prefix": "shell",
+    "body": [
+      "- name: ${1:Execute shell command}",
+      "  shell: somescript.sh >> somelog.txt",
+      "  args:",
+      "    chdir: somedir/",
+      "    creates: somelog.txt",
+     ],
+  },
+  "template": {
+    "prefix": "template",
+    "body": [
+      "- name: ${1:Example template}",
+      "  template:",
+      "    src: ${2:/mytemplates/foo.j2}",
+      "    dest: ${3:/etc/file.conf}",
+      "    owner: ${4:bin}",
+      "    group: ${5:wheel}",
+      "    mode: ${6:0644}",
+    ],
+  },
+  "unarchive": {
+    "prefix": "unarchive",
+    "body": [
+      "- name: ${1:Unarchive a file that needs to be downloaded (added in 2.0)}",
+      "  unarchive:",
+      "    src: ${2:https://example.com/example.zip}",
+      "    dest: ${3:/usr/local/bin}",
+      "    ${4:remote_src: yes}",
+    ],
+  },
+  "yum": {
+    "prefix": "yum",
+    "body": [
+      "- name: ${1:Install package example}",
+      "  yum:",
+      "    name: ['httpd', 'httpd-tools']",
+      "    state: ${2|present,latest,absent|}",
+      "    disable_gpg_check: false",
+    ],
+  },
+  "when": {
+    "prefix": "when",
+    "body": [
+      "\"'test' in result.stdout\"",
+      "ansible_facts['os_family'] == \"RedHat\"",
+      "ansible_facts['distribution'] == \"CentOS\"",
+      "ansible_facts['distribution_major_version'] == \"7\"",
+      "foo is defined",
+      "foo is not defined",
+      "my_custom_fact == '1234'",
+      "result is failed|succeeded|skipped",
+    ],
+}

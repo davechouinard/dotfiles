@@ -1,0 +1,14 @@
+BoldAsFont=no
+Transparency=off
+FontHeight=11
+Scrollbar=none
+OpaqueWhenFocused=yes
+BoldAsColour=yes
+Locale=en_US
+Charset=UTF-8
+Term=xterm-256color
+BellType=0
+ThemeFile=one-dark
+FontSmoothing=default
+FontWeight=400
+Font=DejaVu Sans Mono for Powerline

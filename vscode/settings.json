@@ -1,0 +1,27 @@
+{
+    "breadcrumbs.enabled": true,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "workbench.colorTheme": "Solarized Dark",
+    "editor.detectIndentation": false,
+    "editor.fontSize": 13,
+    "editor.fontLigatures": true,
+    "editor.tabSize": 2,
+    "editor.fontFamily": "'Fira Code'",
+    "editor.parameterHints.enabled": true,
+    "files.associations": {
+        "docker-compose.yml": "yaml",
+        "**/*_vars/*": "yaml",
+        "Vagrantfile*": "ruby",
+        "**/*.yml": "ansible"
+    },
+    "[python]": {
+      "editor.tabSize": 4
+    },
+     "extensions.ignoreRecommendations": true,
+    "files.eol": "\n",
+    "terminal.integrated.fontFamily": "\"DejaVu Sans Mono for Powerline\"",
+    "terminal.integrated.fontWeightBold": "normal",
+    "terminal.integrated.fontSize": 13,
+    "vsicons.dontShowNewVersionMessage": true
+}

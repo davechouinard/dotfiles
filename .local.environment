@@ -1,0 +1,48 @@
+ssh-add -l &>/dev/null
+if [ "$?" != 0 ]; then
+  test -r ~/.ssh-agent && \
+  eval "$(<~/.ssh-agent)" >/dev/null
+
+  ssh-add -l &>/dev/null
+  if [ "$?" != 0 ]; then
+    (umask 066; ssh-agent > ~/.ssh-agent)
+    eval "$(<~/.ssh-agent)" >/dev/null
+    ssh-add
+  fi
+fi
+
+alias d='docker'
+alias di='docker images'
+alias g='git'
+alias v='vim'
+alias mv='mv -v'
+alias rm='rm -i -v'
+alias cp='cp -v'
+alias ls='ls --color=auto'
+alias ll='ls -lahF'
+alias egrep='egrep --colour=auto'
+alias fgrep='fgrep --colour=auto'
+alias free='free -m'
+alias grep='grep --colour=auto'
+alias vi='vim'
+alias netstat='ss'
+
+# aliases for Tmux
+alias tmux='tmux -2'
+alias ta='tmux attach -t'
+alias tnew='tmux new -s'
+alias tls='tmux ls'
+alias tkill='tmux kill-session -t'
+alias mux='tmuxp load'
+
+# convenience aliases for editing configs
+alias ev='vim ~/.vimrc'
+alias eg='vim ~/.gitconfig'
+
+# Visual Studio Code
+alias code='code -r'
+alias c='code'
+
+export EDITOR='vim'
+
+[[ -f ~/.work.environment ]] && source ~/.work.environment
