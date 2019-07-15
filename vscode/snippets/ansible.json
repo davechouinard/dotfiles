@@ -34,6 +34,22 @@
       "    backup: ${7|false,true|}",
     ],
   },
+  "cron": {
+    "prefix": "cron",
+    "body": [
+      "- name: ${1:Creates a cron file under /etc/cron.d}",
+      "  cron:",
+      "    name: ${2:\"yum autoupdate\"}",
+      "    minute: ${3:\"0\"}",
+      "    hour: ${4:\"12\"}",
+      "    day: ${5:\"*\"}",
+      "    month: ${6:\"*\"}",
+      "    weekday: ${7:\"*\"}",
+      "    user: ${8:root}",
+      "    job: ${9:\"YUMINTERACTIVE=0 /usr/sbin/yum-autoupdate\"}",
+      "    cron_file: ${10:ansible_yum-autoupdate}",
+    ],
+  },
   "debug": {
     "prefix": "debug",
     "body": [
